@@ -1,0 +1,18 @@
+import { NestFactory } from '@nestjs/core';
+import { Logger } from '@nestjs/common';
+
+import { AppModule } from './app.module';
+import { EnvConfigService } from './env-config/env-config.service';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  const apiEnvConfigService = app.get(EnvConfigService);
+  const port = apiEnvConfigService.port;
+  const logger = new Logger('Bootstrap');
+
+  app.setGlobalPrefix('api');
+
+  await app.listen(port);
+  logger.log(`Application is running on: ${port}`);
+}
+void bootstrap();
