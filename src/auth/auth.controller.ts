@@ -1,10 +1,19 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Inject,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
 
 import { Routes, Services } from '../utils/constants';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dtos/register.dto';
 
 @Controller(Routes.AUTH)
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(
     @Inject(Services.AUTH) private readonly authService: AuthService,
@@ -12,7 +21,7 @@ export class AuthController {
 
   @Post('register')
   register(@Body() registerDto: RegisterDto) {
-    this.authService.register(registerDto);
+    return this.authService.register(registerDto);
   }
 
   @Post('login')

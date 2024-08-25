@@ -1,0 +1,18 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql:8.4.2
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_DB_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_DB_PASSWORD}
+    container_name: chat_app_db
+    volumes:
+      - ./mysql-data:/var/lib/mysql

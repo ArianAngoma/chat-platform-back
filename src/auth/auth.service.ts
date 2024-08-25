@@ -1,9 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { IAuthService } from './interfaces/auth.interface';
-import { Services } from '../utils/constants';
 import { UsersService } from '../users/users.service';
+
 import { RegisterDto } from './dtos/register.dto';
+
+import { hashPassword } from '../utils/helpers';
+
+import { IAuthService } from './interfaces/auth.interface';
+
+import { Services } from '../utils/constants';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -11,7 +16,11 @@ export class AuthService implements IAuthService {
     @Inject(Services.USERS) private readonly usersService: UsersService,
   ) {}
 
-  register(registerDto: RegisterDto) {
-    this.usersService.create(registerDto);
+  async register(registerDto: RegisterDto) {
+    const hashedPassword = hashPassword(registerDto.password);
+    return this.usersService.create({
+      ...registerDto,
+      password: hashedPassword,
+    });
   }
 }
