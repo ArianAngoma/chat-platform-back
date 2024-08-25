@@ -1,3 +1,5 @@
+import { RegisterDto } from '../dtos/register.dto';
+
 export interface IAuthService {
-  validateUser(): void;
+  register(registerDto: RegisterDto): void;
 }
