@@ -19,7 +19,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
     @Inject(Services.SESSION) private readonly sessionService: SessionService,
   ) {
     super({
-      secretOrKey: envConfigService.jwtRefreshSecret,
+      secretOrKey: envConfigService.jwtSecret,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
     });

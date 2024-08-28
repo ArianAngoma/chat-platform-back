@@ -81,7 +81,7 @@ export class AuthService implements IAuthService {
       {
         expiresIn:
           type === TokenType.ACCESS
-            ? this.envConfigService.jwtExpirationIn
+            ? this.envConfigService.jwtAccessExpirationIn
             : this.envConfigService.jwtRefreshExpirationIn,
       },
     );

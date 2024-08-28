@@ -9,9 +9,8 @@ export const envSchema = z.object({
   MYSQL_DB_NAME: z.string(),
 
   JWT_SECRET: z.string(),
-  JWT_EXPIRES_IN: z.string(),
 
-  JWT_REFRESH_SECRET: z.string(),
+  JWT_ACCESS_EXPIRES_IN: z.string(),
   JWT_REFRESH_EXPIRES_IN: z.string(),
 
   MAX_USER_ACTIVITY_DAYS: z.coerce.number(),

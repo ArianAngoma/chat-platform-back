@@ -35,12 +35,8 @@ export class EnvConfigService {
     return this.configService.get<string>('JWT_SECRET');
   }
 
-  get jwtExpirationIn(): string {
-    return this.configService.get<string>('JWT_EXPIRES_IN');
-  }
-
-  get jwtRefreshSecret(): string {
-    return this.configService.get<string>('JWT_REFRESH_SECRET');
+  get jwtAccessExpirationIn(): string {
+    return this.configService.get<string>('JWT_ACCESS_EXPIRES_IN');
   }
 
   get jwtRefreshExpirationIn(): string {
