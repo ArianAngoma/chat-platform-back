@@ -1,9 +1,16 @@
 export enum Routes {
   AUTH = 'auth',
-  USERS = 'users',
+  USER = 'user',
+  SESSION = 'session',
 }
 
 export enum Services {
   AUTH = 'AUTH_SERVICES',
-  USERS = 'USERS_SERVICES',
+  USER = 'USER_SERVICES',
+  SESSION = 'SESSION_SERVICES',
+}
+
+export enum AuthStrategies {
+  JWT_ACCESS = 'jwt-access',
+  JWT_REFRESH = 'jwt-refresh',
 }

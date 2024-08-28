@@ -4,11 +4,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { EnvConfigModule } from './env-config/env-config.module';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './user/user.module';
 
 import { EnvConfigService } from './env-config/env-config.service';
 
 import { envSchema } from './env-config/env-config.schema';
+import { SessionModule } from './session/session.module';
 
 import entities from './utils/typeorm';
 
@@ -33,7 +34,8 @@ import entities from './utils/typeorm';
       inject: [EnvConfigService],
     }),
     AuthModule,
-    UsersModule,
+    UserModule,
+    SessionModule,
   ],
   controllers: [],
   providers: [],

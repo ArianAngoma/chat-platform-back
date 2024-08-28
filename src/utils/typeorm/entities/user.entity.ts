@@ -1,8 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Exclude } from 'class-transformer';
 
+import { Session } from './session.entity';
+
 @Entity({
-  name: 'users',
+  name: 'user',
 })
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -10,29 +18,31 @@ export class User {
 
   @Column({
     type: 'varchar',
-    length: 320,
-    unique: true,
     name: 'email',
   })
+  @Index({ unique: true })
   email: string;
 
   @Column({
-    type: 'text',
-    select: false,
+    type: 'varchar',
     name: 'password',
+    select: false,
   })
   @Exclude()
   password: string;
 
   @Column({
-    type: 'text',
+    type: 'varchar',
     name: 'first_name',
   })
   firstName: string;
 
   @Column({
-    type: 'text',
+    type: 'varchar',
     name: 'last_name',
   })
   lastName: string;
+
+  @OneToMany(() => Session, (session) => session.user)
+  sessions: Session[];
 }

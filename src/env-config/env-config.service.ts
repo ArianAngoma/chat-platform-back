@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { Env } from './env-config.schema';
 
 @Injectable()
@@ -28,5 +29,25 @@ export class EnvConfigService {
 
   get mysqlDatabase(): string {
     return this.configService.get<string>('MYSQL_DB_NAME');
+  }
+
+  get jwtSecret(): string {
+    return this.configService.get<string>('JWT_SECRET');
+  }
+
+  get jwtExpirationIn(): string {
+    return this.configService.get<string>('JWT_EXPIRES_IN');
+  }
+
+  get jwtRefreshSecret(): string {
+    return this.configService.get<string>('JWT_REFRESH_SECRET');
+  }
+
+  get jwtRefreshExpirationIn(): string {
+    return this.configService.get<string>('JWT_REFRESH_EXPIRES_IN');
+  }
+
+  get maxUserActivityDays(): number {
+    return this.configService.get<number>('MAX_USER_ACTIVITY_DAYS');
   }
 }

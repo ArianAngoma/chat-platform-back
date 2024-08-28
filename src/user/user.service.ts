@@ -8,12 +8,12 @@ import { Repository } from 'typeorm';
 
 import { CreateUserDto } from './dtos/create-user.dto';
 
-import { IUsersService } from './interfaces/users.interface';
+import { IUsersService } from './interfaces/user.interface';
 
 import { User } from '../utils/typeorm';
 
 @Injectable()
-export class UsersService implements IUsersService {
+export class UserService implements IUsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -27,6 +27,21 @@ export class UsersService implements IUsersService {
     } catch (error) {
       this.handleDBError(error);
     }
+  }
+
+  async findOneById(id: string) {
+    return this.userRepository.findOneBy({ id });
+  }
+
+  async findByEmailToValidate(email: string) {
+    return this.userRepository.findOne({
+      where: { email },
+      select: {
+        id: true,
+        email: true,
+        password: true,
+      },
+    });
   }
 
   private handleDBError(error: any): never {
