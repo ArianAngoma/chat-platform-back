@@ -34,14 +34,11 @@ export class UserService implements IUsersService {
   }
 
   async findByEmailToValidate(email: string) {
-    return this.userRepository.findOne({
-      where: { email },
-      select: {
-        id: true,
-        email: true,
-        password: true,
-      },
-    });
+    return await this.userRepository
+      .createQueryBuilder('user')
+      .where('email = :email', { email })
+      .addSelect('user.password')
+      .getOne();
   }
 
   private handleDBError(error: any): never {

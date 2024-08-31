@@ -14,6 +14,8 @@ export const envSchema = z.object({
   JWT_REFRESH_EXPIRES_IN: z.string(),
 
   MAX_USER_ACTIVITY_DAYS: z.coerce.number(),
+
+  CORS_ORIGIN: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;

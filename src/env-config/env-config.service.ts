@@ -46,4 +46,8 @@ export class EnvConfigService {
   get maxUserActivityDays(): number {
     return this.configService.get<number>('MAX_USER_ACTIVITY_DAYS');
   }
+
+  get corsOrigin(): string {
+    return this.configService.get<string>('CORS_ORIGIN');
+  }
 }

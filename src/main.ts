@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { Logger, ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from './app.module';
+
 import { EnvConfigService } from './env-config/env-config.service';
 
 async function bootstrap() {
@@ -9,6 +10,11 @@ async function bootstrap() {
   const apiEnvConfigService = app.get(EnvConfigService);
   const port = apiEnvConfigService.port;
   const logger = new Logger('Bootstrap');
+
+  app.enableCors({
+    origin: apiEnvConfigService.corsOrigin,
+    credentials: true,
+  });
 
   app.setGlobalPrefix('api');
 
