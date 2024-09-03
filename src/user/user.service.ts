@@ -10,7 +10,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 
 import { IUsersService } from './interfaces/user.interface';
 
-import { User } from '../utils/typeorm';
+import { User } from '../typeorm/entities';
 
 @Injectable()
 export class UserService implements IUsersService {

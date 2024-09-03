@@ -13,9 +13,9 @@ import { comparePasswords, hashPassword } from '../utils/helpers';
 import { IAuthService } from './interfaces/auth.interface';
 import { JwtPayload, TokenType } from './interfaces/jwt-payload.interface';
 
-import { Session, User } from '../utils/typeorm';
+import { Session, User } from '../typeorm/entities';
 
-import { Services } from '../utils/constants';
+import { Service } from '../constants';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -23,8 +23,8 @@ export class AuthService implements IAuthService {
   private readonly IP_ADDRESS = '192.168.1.1';
 
   constructor(
-    @Inject(Services.USER) private readonly userService: UserService,
-    @Inject(Services.SESSION) private readonly sessionService: SessionService,
+    @Inject(Service.USER) private readonly userService: UserService,
+    @Inject(Service.SESSION) private readonly sessionService: SessionService,
     private readonly envConfigService: EnvConfigService,
     private readonly jwtService: JwtService,
   ) {}

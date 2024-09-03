@@ -1,8 +1,8 @@
 import { applyDecorators, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { AuthStrategies } from '../../../utils/constants';
+import { AuthStrategy } from '../../../constants';
 
 export function AuthRefresh() {
-  return applyDecorators(UseGuards(AuthGuard(AuthStrategies.JWT_REFRESH)));
+  return applyDecorators(UseGuards(AuthGuard(AuthStrategy.JWT_REFRESH)));
 }

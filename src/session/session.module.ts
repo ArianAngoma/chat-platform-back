@@ -3,21 +3,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { SessionService } from './session.service';
 
-import { Session } from '../utils/typeorm';
+import { Session } from '../typeorm/entities';
 
-import { Services } from '../utils/constants';
+import { Service } from '../constants';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Session])],
   providers: [
     {
-      provide: Services.SESSION,
+      provide: Service.SESSION,
       useClass: SessionService,
     },
   ],
   exports: [
     {
-      provide: Services.SESSION,
+      provide: Service.SESSION,
       useClass: SessionService,
     },
   ],

@@ -1,7 +1,7 @@
 import { IsIP, IsNotEmpty, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 
-import { User } from '../../utils/typeorm';
+import { User } from '../../typeorm/entities';
 
 export class CreateSessionDto {
   @Type(() => User)

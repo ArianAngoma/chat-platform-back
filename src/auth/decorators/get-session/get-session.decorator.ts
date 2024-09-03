@@ -4,7 +4,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 
-import { Session } from '../../../utils/typeorm';
+import { Session } from '../../../typeorm/entities';
 
 export const GetSession = createParamDecorator(
   (data, ctx: ExecutionContext) => {

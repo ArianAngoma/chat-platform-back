@@ -1,8 +1,8 @@
 import { applyDecorators, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { AuthStrategies } from '../../../utils/constants';
+import { AuthStrategy } from '../../../constants';
 
 export function AuthAccess() {
-  return applyDecorators(UseGuards(AuthGuard(AuthStrategies.JWT_ACCESS)));
+  return applyDecorators(UseGuards(AuthGuard(AuthStrategy.JWT_ACCESS)));
 }

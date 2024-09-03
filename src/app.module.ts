@@ -11,7 +11,7 @@ import { EnvConfigService } from './env-config/env-config.service';
 import { envSchema } from './env-config/env-config.schema';
 import { SessionModule } from './session/session.module';
 
-import entities from './utils/typeorm';
+import entities from './typeorm/entities';
 
 @Module({
   imports: [

@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateSessionDto } from './dtos/create-session.dto';
 import { UpdateLastActivityDto } from './dtos/update-last-activity.dto';
 
-import { Session, User } from '../utils/typeorm';
+import { Session, User } from '../typeorm/entities';
 
 @Injectable()
 export class SessionService {

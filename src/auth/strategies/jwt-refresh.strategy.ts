@@ -7,16 +7,16 @@ import { SessionService } from '../../session/session.service';
 
 import { JwtPayload, TokenType } from '../interfaces/jwt-payload.interface';
 
-import { AuthStrategies, Services } from '../../utils/constants';
+import { AuthStrategy, Service } from '../../constants';
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
   Strategy,
-  AuthStrategies.JWT_REFRESH,
+  AuthStrategy.JWT_REFRESH,
 ) {
   constructor(
     private readonly envConfigService: EnvConfigService,
-    @Inject(Services.SESSION) private readonly sessionService: SessionService,
+    @Inject(Service.SESSION) private readonly sessionService: SessionService,
   ) {
     super({
       secretOrKey: envConfigService.jwtSecret,

@@ -13,7 +13,7 @@ import { AuthController } from './auth.controller';
 import { JwtAccessStrategy } from './strategies/jwt-access.strategy';
 import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
 
-import { Services } from '../utils/constants';
+import { Service } from '../constants';
 
 @Module({
   imports: [
@@ -32,7 +32,7 @@ import { Services } from '../utils/constants';
   controllers: [AuthController],
   providers: [
     {
-      provide: Services.AUTH,
+      provide: Service.AUTH,
       useClass: AuthService,
     },
     JwtAccessStrategy,

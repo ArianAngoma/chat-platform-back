@@ -15,15 +15,15 @@ import { LoginDto } from './dtos/login.dto';
 import { GetSession } from './decorators/get-session/get-session.decorator';
 import { AuthRefresh } from './decorators/auth/auth-refresh.decorator';
 
-import { Session } from '../utils/typeorm';
+import { Session } from '../typeorm/entities';
 
-import { Routes, Services } from '../utils/constants';
+import { Route, Service } from '../constants';
 
-@Controller(Routes.AUTH)
+@Controller(Route.AUTH)
 @UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(
-    @Inject(Services.AUTH) private readonly authService: AuthService,
+    @Inject(Service.AUTH) private readonly authService: AuthService,
   ) {}
 
   @Post('register')
