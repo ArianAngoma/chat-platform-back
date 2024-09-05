@@ -4,7 +4,7 @@ import * as Mustache from 'mustache';
 
 import { UserService } from '../../user/user.service';
 
-import * as entities from '../../typeorm/entities';
+import { User } from '../../typeorm/entities';
 
 import { AppAbility, Service } from '../../constants';
 
@@ -14,7 +14,7 @@ export class CaslAbilityFactory {
     @Inject(Service.USER) private readonly userService: UserService,
   ) {}
 
-  async createForUser(user: entities.User) {
+  async createForUser(user: User) {
     const { can, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
 
     const userPermissions = await this.userService.findAllPermissionsById(
@@ -33,7 +33,7 @@ export class CaslAbilityFactory {
     return build();
   }
 
-  private renderCondition(conditionTemplate: string, user: entities.User) {
+  private renderCondition(conditionTemplate: string, user: User) {
     return Mustache.render(conditionTemplate, user);
   }
 }
