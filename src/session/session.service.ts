@@ -55,6 +55,11 @@ export class SessionService {
   }
 
   async findById(sessionId: string) {
-    return this.sessionsRepository.findOneBy({ id: sessionId });
+    return this.sessionsRepository.findOne({
+      where: { id: sessionId },
+      relations: {
+        user: true,
+      },
+    });
   }
 }

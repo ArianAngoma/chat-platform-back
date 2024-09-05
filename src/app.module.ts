@@ -5,11 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EnvConfigModule } from './env-config/env-config.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { SessionModule } from './session/session.module';
+import { CaslModule } from './casl/casl.module';
 
 import { EnvConfigService } from './env-config/env-config.service';
 
 import { envSchema } from './env-config/env-config.schema';
-import { SessionModule } from './session/session.module';
 
 import entities from './typeorm/entities';
 
@@ -36,6 +37,7 @@ import entities from './typeorm/entities';
     AuthModule,
     UserModule,
     SessionModule,
+    CaslModule,
   ],
   controllers: [],
   providers: [],

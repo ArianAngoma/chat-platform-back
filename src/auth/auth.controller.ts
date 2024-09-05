@@ -14,6 +14,7 @@ import { LoginDto } from './dtos/login.dto';
 
 import { GetSession } from './decorators/get-session/get-session.decorator';
 import { AuthRefresh } from './decorators/auth/auth-refresh.decorator';
+import { AuthAccess } from './decorators/auth/auth-access.decorator';
 
 import { Session } from '../typeorm/entities';
 
@@ -43,5 +44,9 @@ export class AuthController {
   }
 
   @Post('logout')
-  logout() {}
+  @AuthAccess()
+  async logout(@GetSession() session: Session) {
+    console.log({ session });
+    return this.authService.logout();
+  }
 }

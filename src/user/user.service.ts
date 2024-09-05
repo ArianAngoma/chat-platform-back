@@ -41,6 +41,30 @@ export class UserService implements IUsersService {
       .getOne();
   }
 
+  async findAllPermissionsById(userId: string) {
+    const user = await this.getUserWithPermissions(userId);
+    if (!user) throw new BadRequestException('User not found');
+
+    return this.flattenPermissions(user);
+  }
+
+  private async getUserWithPermissions(userId: string) {
+    return this.userRepository.findOne({
+      where: { id: userId },
+      relations: {
+        roles: {
+          permissions: {
+            subject: true,
+          },
+        },
+      },
+    });
+  }
+
+  private flattenPermissions(user: User) {
+    return user.roles.flatMap((role) => role.permissions);
+  }
+
   private handleDBError(error: any): never {
     if (error.code === 'ER_DUP_ENTRY' || error.errno === 1062) {
       throw new ConflictException('User with this email already exists');

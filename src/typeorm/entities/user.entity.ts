@@ -2,12 +2,15 @@ import {
   Column,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 import { Session } from './session.entity';
+import { Role } from './role.entity';
 
 @Entity({
   name: 'user',
@@ -42,6 +45,20 @@ export class User {
     name: 'last_name',
   })
   lastName: string;
+
+  @ManyToMany(() => Role, (role) => role.users)
+  @JoinTable({
+    name: 'user_role',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
+  })
+  roles: Role[];
 
   @OneToMany(() => Session, (session) => session.user)
   sessions: Session[];

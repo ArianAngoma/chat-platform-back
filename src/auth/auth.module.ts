@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { UserModule } from '../user/user.module';
 import { SessionModule } from '../session/session.module';
+import { CaslModule } from '../casl/casl.module';
 
 import { AuthService } from './auth.service';
 import { EnvConfigService } from '../env-config/env-config.service';
@@ -26,6 +27,7 @@ import { Service } from '../constants';
       }),
       inject: [EnvConfigService],
     }),
+    CaslModule,
     UserModule,
     SessionModule,
   ],

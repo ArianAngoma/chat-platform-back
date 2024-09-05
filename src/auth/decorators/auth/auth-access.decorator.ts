@@ -1,8 +1,15 @@
 import { applyDecorators, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { AuthStrategy } from '../../../constants';
+import { PoliciesGuard } from '../../guards/policies.guard';
 
-export function AuthAccess() {
-  return applyDecorators(UseGuards(AuthGuard(AuthStrategy.JWT_ACCESS)));
+import { CheckPolicies } from '../check-policies/check-policies.decorator';
+
+import { AuthStrategy, PolicyHandler } from '../../../constants/auth.constant';
+
+export function AuthAccess(...handlers: PolicyHandler[]) {
+  return applyDecorators(
+    CheckPolicies(...handlers),
+    UseGuards(AuthGuard(AuthStrategy.JWT_ACCESS), PoliciesGuard),
+  );
 }

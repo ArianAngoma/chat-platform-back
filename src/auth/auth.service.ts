@@ -51,6 +51,10 @@ export class AuthService implements IAuthService {
     return this.createTokens(session.id);
   }
 
+  async logout() {
+    return { message: 'Logout successful' };
+  }
+
   private async getTokensAndSession(user: User) {
     const session = await this.sessionService.create({
       user,

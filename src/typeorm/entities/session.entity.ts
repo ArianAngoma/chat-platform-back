@@ -31,7 +31,7 @@ export class Session {
   ipAddress: string;
 
   @Index('idx_user_sessions')
-  @ManyToOne(() => User, (user) => user.sessions, { eager: true })
+  @ManyToOne(() => User, (user) => user.sessions)
   @JoinColumn({ name: 'user_id' })
   user: User;
 
