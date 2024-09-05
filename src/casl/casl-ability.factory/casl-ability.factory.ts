@@ -1,21 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import {
-  AbilityBuilder,
-  createMongoAbility,
-  ExtractSubjectType,
-} from '@casl/ability';
+import { AbilityBuilder, createMongoAbility } from '@casl/ability';
 import * as Mustache from 'mustache';
 
 import { UserService } from '../../user/user.service';
 
 import * as entities from '../../typeorm/entities';
 
-import { AppAbility, PermissionSubject, Service } from '../../constants';
-
-const subjectClassMap = Object.keys(entities).reduce((map, entityName) => {
-  map[entityName] = entities[entityName];
-  return map;
-}, {});
+import { AppAbility, Service } from '../../constants';
 
 @Injectable()
 export class CaslAbilityFactory {
@@ -24,9 +15,7 @@ export class CaslAbilityFactory {
   ) {}
 
   async createForUser(user: entities.User) {
-    const { can, build, rules } = new AbilityBuilder<AppAbility>(
-      createMongoAbility,
-    );
+    const { can, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
 
     const userPermissions = await this.userService.findAllPermissionsById(
       user.id,
@@ -38,20 +27,10 @@ export class CaslAbilityFactory {
         user,
       );
 
-      can(
-        permission.action,
-        subjectClassMap[permission.subject.name],
-        JSON.parse(condition),
-      );
+      can(permission.action, permission.subject.name, JSON.parse(condition));
     }
 
-    console.log({ rules: JSON.stringify(rules) });
-
-    return build({
-      detectSubjectType: (item) => {
-        return item.constructor as ExtractSubjectType<PermissionSubject>;
-      },
-    });
+    return build();
   }
 
   private renderCondition(conditionTemplate: string, user: entities.User) {

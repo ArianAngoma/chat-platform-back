@@ -1,6 +1,7 @@
 import { InferSubjects, MongoAbility } from '@casl/ability';
 
 import { Permission, Role, Session, Subject, User } from '../typeorm/entities';
+import { SubjectEnum } from '../typeorm/entities/subject.entity';
 
 export enum AuthStrategy {
   JWT_ACCESS = 'jwt-access',
@@ -32,6 +33,7 @@ export type PermissionSubject =
       | typeof Permission
       | typeof Subject
     >
+  | SubjectEnum
   | 'all';
 
 export type AppAbility = MongoAbility<[PermissionAction, PermissionSubject]>;

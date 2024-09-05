@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 import { Permission } from './permission.entity';
 
-enum SubjectEnum {
+export enum SubjectEnum {
   USER = 'User',
   SESSION = 'Session',
   ROLE = 'Role',
